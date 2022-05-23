@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseMicroServices: 'http://localhost:40100'
 };

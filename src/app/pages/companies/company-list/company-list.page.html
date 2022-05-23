@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="chevron-back-outline" text="" class="ion-no-padding"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="success">Companies</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-img src="/assets/img/companies.png"></ion-img>
+    <ion-button expand="block" color="success" shape="round" (click)="onClickAddCompany()">
+      <ion-label><b>Add Department</b></ion-label>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="vm-shadow">
+    <ion-item-sliding *ngFor="let enterprice of enterprises">
+      <ion-item button (click)="onClickCompanyForm(enterprice.id)">
+        <ion-avatar slot="start" size>
+          <img src="/assets/img/company.png">
+        </ion-avatar>
+        <ion-label>
+          <b>Name: </b> {{enterprice.name}}
+          <br>
+          <b>Address:</b> {{enterprice.address}}
+          <br>
+          <b>Phone:</b> {{enterprice.phone}}
+          <br>
+          <b>State:</b> {{enterprice.status ? 'Si' : 'No'}}
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="onClickDeleteCompany(enterprice.id)">Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

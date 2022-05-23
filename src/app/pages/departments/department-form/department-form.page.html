@@ -1,0 +1,118 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="chevron-back-outline" text="" class="ion-no-padding"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="success">{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="fDepartment" (submit)="submitForm()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>Name </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="name" type="text" placeholder="Please enter department name">
+            </ion-input>
+          </ion-item>
+          <ion-item lines="none"
+            *ngIf="!fDepartment.controls.name.valid && fDepartment.controls.name.touched && update">
+            <ion-text color="danger" class="form-error">
+              Please enter a valid name.
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>Description </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="description" type="text"
+              placeholder="Please enter department description">
+            </ion-input>
+          </ion-item>
+          <ion-item lines="none"
+            *ngIf="!fDepartment.controls.description.valid && fDepartment.controls.description.touched && update">
+            <ion-text color="danger" class="form-error">
+              Please enter a valid description.
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>Phone </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="phone" type="text" placeholder="Please enter department phone">
+            </ion-input>
+          </ion-item>
+          <ion-item lines="none"
+            *ngIf="!fDepartment.controls.phone.valid && fDepartment.controls.phone.touched && update">
+            <ion-text color="danger" class="form-error">
+              Please enter a valid phone.
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>Company </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-select multiple="true" placeholder="Select Company" formControlName="id_enterprise">
+              <ion-select-option *ngFor="let company of companies" [value]="company.id">{{company.name}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none"
+            *ngIf="!fDepartment.controls.id_enterprise.valid && fDepartment.controls.id_enterprise.touched && update">
+            <ion-text color="danger" class="form-error">
+              Please select a company.
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="full">
+            <ion-label>
+              <b>State </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-toggle formControlName="status" slot="end" color="danger"></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6" class="ion-padding" *ngIf="!view">
+          <ion-button (click)="onClickCancel()" expand="block" shape="round" color="medium">
+            Cancel
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" class="ion-text-center ion-padding">
+          <ion-button type="submit" expand="block" shape="round" color="warning" [disabled]="!fDepartment.valid"
+            *ngIf="!view">
+            Submit
+          </ion-button>
+          <ion-button (click)="onClickEditDepartment()" expand="block" shape="round" color="success" *ngIf="view">
+            <b>Edit</b>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+/

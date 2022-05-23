@@ -1,0 +1,36 @@
+img {
+  height: 12rem;
+  width: 100%;
+}
+
+.vm-card-btn {
+  // Comportamiento
+  margin: 0.1rem;
+  // Tamaño
+  width: auto;
+  height: 12rem;
+
+  ion-card-content {
+    // Comportamiento
+    padding: 0 0 0 0.5rem;
+    // Tamaño
+    width: auto;
+    height: 100%;
+
+    ion-img {
+      width: 100%;
+      height: auto;
+      padding: 1rem;
+      object-fit: cover;
+    }
+
+    ion-label {
+      font-size: 1rem;
+    }
+  }
+
+  &:active {
+    background-color: var(--vm-color-gray);
+    transform: translateY(4px);
+  }
+}

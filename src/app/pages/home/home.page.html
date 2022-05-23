@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="ion-text-center" color="success">Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="vm-align-vertical">
+    <ion-row>
+      <ion-col>
+        <img src="assets/img/sicpaBanner.png" class="vm-shadow" />
+      </ion-col>
+    </ion-row>
+    <hr>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="4" class=" ion-text-center" size-lg="3" size-md="3" size-sm="4" size-xs="6">
+        <ion-card (click)="navEnterprises()" class="vm-card-btn vm-shadow vm-round-40">
+          <ion-card-content>
+            <ion-img src="assets/img/companies.png"></ion-img>
+            <ion-label><span><b>Companies</b></span></ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4" class=" ion-text-center" size-lg="3" size-md="3" size-sm="4" size-xs="6">
+        <ion-card (click)="navDepartments()" class="vm-card-btn vm-shadow vm-round-40">
+          <ion-card-content>
+            <ion-img src="assets/img/departments.png"></ion-img>
+            <ion-label><span><b>Departments</b></span></ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4" class=" ion-text-center" size-lg="3" size-md="3" size-sm="4" size-xs="6">
+        <ion-card (click)="navEmployees()" class="vm-card-btn vm-shadow vm-round-40">
+          <ion-card-content>
+            <ion-img src="assets/img/employees.jpg"></ion-img>
+            <ion-label><span><b>Employees</b></span></ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

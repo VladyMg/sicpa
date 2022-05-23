@@ -1,0 +1,17 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>
+      User <ion-text color="danger">*</ion-text>
+    </ion-label>
+    <ion-input [(ngModel)]="user" required></ion-input>
+  </ion-item>
+  <ion-button (click)="onClickLogin()" expand="block" fill="clear" shape="round">
+    Login
+  </ion-button>
+</ion-content>

@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,40 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+:root {
+  // Colours
+  --vm-color-light: #89c33f;
+  --vm-color-dark: #033b5a;
+  --vm-color-gray: #d8d8d8;
+  --vm-color-lighgray: #f6f7f6;
+  --vm-color-orange: #f39020;
+
+  // Navive color
+  --ion-color-success: #033b5a;
+}
+
+// Vertital
+.vm-align-vertical {
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.vm-shadow {
+  -webkit-box-shadow: 3px 3px 5px 0px #464444, 3px 3px 15px 5px rgba(0, 0, 0, 0);
+  box-shadow: 3px 3px 5px 0px #616060, 3px 3px 15px 5px rgba(0, 0, 0, 0);
+  border: solid 1px var(--vm-color-gray);
+}
+
+.vm-round-40 {
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+}
+
+ion-list {
+  border-top: solid 2px var(--vm-color-dark);
+  margin-top: 0.5rem;
+}

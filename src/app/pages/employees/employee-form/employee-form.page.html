@@ -1,0 +1,142 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" icon="chevron-back-outline" text="" class="ion-no-padding"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center" color="success">{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="fEmployee" (submit)="submitForm()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>Name </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="name" type="text" placeholder="Please enter department name">
+            </ion-input>
+          </ion-item>
+          <ion-item lines="none" *ngIf="!fEmployee.controls.name.valid && fEmployee.controls.name.touched && update">
+            <ion-text color="danger" class="form-error">
+              Please enter a valid name.
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>Surname </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="surnam" type="text" placeholder="Please enter department surnam">
+            </ion-input>
+          </ion-item>
+          <ion-item lines="none"
+            *ngIf="!fEmployee.controls.surnam.valid && fEmployee.controls.surnam.touched && update">
+            <ion-text color="danger" class="form-error">
+              Please enter a valid surname.
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="view">
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>User </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="name" type="text" placeholder="Please enter department name">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>Email </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="mail" type="text" placeholder="Please enter department mail">
+            </ion-input>
+          </ion-item>
+          <ion-item lines="none" *ngIf="!fEmployee.controls.mail.valid && fEmployee.controls.mail.touched && update">
+            <ion-text color="danger" class="form-error">
+              Please enter a valid mail.
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>Age </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="age" type="text" placeholder="Please enter department age">
+            </ion-input>
+          </ion-item>
+          <ion-item lines="none" *ngIf="!fEmployee.controls.age.valid && fEmployee.controls.age.touched && update">
+            <ion-text color="danger" class="form-error">
+              Please enter a valid age.
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating" color="success">
+              <b>Position </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required formControlName="position" type="text" placeholder="Please enter department position">
+            </ion-input>
+          </ion-item>
+          <ion-item lines="none"
+            *ngIf="!fEmployee.controls.position.valid && fEmployee.controls.position.touched && update">
+            <ion-text color="danger" class="form-error">
+              Please enter a valid position.
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="full">
+            <ion-label color="success">
+              <b>State </b>
+              <ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-toggle formControlName="status" slot="end" color="danger"></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="6" class="ion-padding" *ngIf="!view && update">
+          <ion-button (click)="onClickCancel()" expand="block" shape="round" color="medium">
+            Cancel
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" class="ion-text-center ion-padding">
+          <ion-button type="submit" expand="block" shape="round" color="warning" [disabled]="!fEmployee.valid"
+            *ngIf="!view">
+            Submit
+          </ion-button>
+          <ion-button (click)="onClickEditEmployee()" expand="block" shape="round" color="success" *ngIf="view">
+            <b>Edit</b>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+/
