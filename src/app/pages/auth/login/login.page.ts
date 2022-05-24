@@ -9,6 +9,7 @@ import { AuthService } from '../../../services/auth.service';
 export class LoginPage implements OnInit {
 
   user = '';
+  position = '';
 
   constructor(
     private authService: AuthService
@@ -17,8 +18,8 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  submitLogin() {
-    this.authService.login(this.user);
+  async submitLogin() {
+    const resp = await this.authService.login(this.user, this.position);
   }
 
 }

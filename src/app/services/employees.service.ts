@@ -90,7 +90,7 @@ export class EmployeesService {
 
     return new Promise<string>(async (resolve) => {
 
-      const user: string = await this.storageService.get(GlobalConstants.user) || '';
+      const user = await this.authService.validateUser();
 
       const url = `${this.servicesUri}/api/Employees`;
 

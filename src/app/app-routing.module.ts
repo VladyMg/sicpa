@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { UserGuard } from './guards/user.guard';
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginPageModule)
+        loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginPageModule),
       }
     ]
   }

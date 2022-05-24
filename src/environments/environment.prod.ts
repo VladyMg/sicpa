@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseMicroServices: 'http://localhost:40100'
+  baseMicroServices: '## Your end point of Sicpa Service Api here ##'
 };
