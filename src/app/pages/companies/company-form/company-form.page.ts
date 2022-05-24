@@ -77,10 +77,19 @@ export class CompanyFormPage implements OnInit {
     } else {
       await this.enterprisesService.create(this.company);
     }
-
-
     this.navCtrl.navigateForward(['/tabs/app/companies/company-list']);
+  }
 
+  onClickCancel() {
+    this.view = true;
+    this.update = false;
+    this.fCompany.setValue({
+      name: this.company.name,
+      status: this.company.status,
+      address: this.company.address,
+      phone: this.company.phone
+    });
+    this.fCompany.disable();
   }
 
 }

@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="fDepartment" (submit)="submitForm()">
-    <ion-grid>
+  <ion-grid>
+    <form [formGroup]="fDepartment" (submit)="submitForm()">
       <ion-row>
         <ion-col>
           <ion-item lines="full">
@@ -21,7 +21,7 @@
             </ion-input>
           </ion-item>
           <ion-item lines="none"
-            *ngIf="!fDepartment.controls.name.valid && fDepartment.controls.name.touched && update">
+            *ngIf="!fDepartment.controls.name.valid && fDepartment.controls.name.touched && update && !view">
             <ion-text color="danger" class="form-error">
               Please enter a valid name.
             </ion-text>
@@ -40,7 +40,7 @@
             </ion-input>
           </ion-item>
           <ion-item lines="none"
-            *ngIf="!fDepartment.controls.description.valid && fDepartment.controls.description.touched && update">
+            *ngIf="!fDepartment.controls.description.valid && fDepartment.controls.description.touched && update && !view">
             <ion-text color="danger" class="form-error">
               Please enter a valid description.
             </ion-text>
@@ -58,7 +58,7 @@
             </ion-input>
           </ion-item>
           <ion-item lines="none"
-            *ngIf="!fDepartment.controls.phone.valid && fDepartment.controls.phone.touched && update">
+            *ngIf="!fDepartment.controls.phone.valid && fDepartment.controls.phone.touched && update && !view">
             <ion-text color="danger" class="form-error">
               Please enter a valid phone.
             </ion-text>
@@ -78,7 +78,7 @@
             </ion-select>
           </ion-item>
           <ion-item lines="none"
-            *ngIf="!fDepartment.controls.id_enterprise.valid && fDepartment.controls.id_enterprise.touched && update">
+            *ngIf="!fDepartment.controls.id_enterprise.valid && fDepartment.controls.id_enterprise.touched && update && !view">
             <ion-text color="danger" class="form-error">
               Please select a company.
             </ion-text>
@@ -88,7 +88,7 @@
       <ion-row>
         <ion-col size="12">
           <ion-item lines="full">
-            <ion-label>
+            <ion-label color="success">
               <b>State </b>
               <ion-text color="danger">*</ion-text>
             </ion-label>
@@ -97,7 +97,7 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center">
-        <ion-col size="6" class="ion-padding" *ngIf="!view">
+        <ion-col size="6" class="ion-padding" *ngIf="!view && update && !view">
           <ion-button (click)="onClickCancel()" expand="block" shape="round" color="medium">
             Cancel
           </ion-button>
@@ -112,7 +112,46 @@
           </ion-button>
         </ion-col>
       </ion-row>
-    </ion-grid>
-  </form>
+    </form>
+    <ion-row *ngIf="view">
+      <ion-col size="12">
+        <ion-card class="vm-shadow ion-no-margin">
+          <ion-card-header>
+            <ion-item>
+              <ion-label color="medium"><b>Department Employees</b></ion-label>
+              <ion-button (click)="onClickAddEmployee()" color="warning">
+                <ion-icon slot="icon-only" name="add"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item-sliding *ngFor="let employee of department.employees">
+                <ion-item button (click)="onClickEmployeeForm(employee.id)" class="ion-no-padding">
+                  <ion-avatar slot="start" size>
+                    <img src="/assets/img/department.png">
+                  </ion-avatar>
+                  <ion-label>
+                    <b>Name: </b> {{employee.name | uppercase}} {{employee.surnam | uppercase}}
+                    <br>
+                    <b>Email:</b> {{employee.mail}}
+                    <br>
+                    <b>Age:</b> {{employee.age}}
+                    <br>
+                    <b>State:</b> {{employee.status ? 'Active' : 'Disabled'}}
+                  </ion-label>
+                </ion-item>
+                <ion-item-options side="end">
+                  <ion-item-option color="danger" (click)="onClickDeleteEmployeeDepartment(employee.id)">Delete
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
 /

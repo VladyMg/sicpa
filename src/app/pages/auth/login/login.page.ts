@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  onClickLogin() {
+  submitLogin() {
     this.authService.login(this.user);
   }
 

@@ -6,8 +6,10 @@ import { Enterprise } from '../../../models/Enterprice.model';
 import { ActivatedRoute } from '@angular/router';
 import { DepartmentsService } from '../../../services/departments.service';
 import { EmployeesService } from '../../../services/employees.service';
-import { NavController } from '@ionic/angular';
+import { ActionSheetController, IonRouterOutlet, ModalController, NavController } from '@ionic/angular';
 import { Employee } from '../../../models/Employee.model';
+import { ModalDepartmentsComponent } from '../../../components/modal-departments/modal-departments.component';
+import { DepsEmpsService } from '../../../services/deps-emps.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -29,7 +31,10 @@ export class EmployeeFormPage implements OnInit {
     private fb: FormBuilder,
     private navCtrl: NavController,
     private employeesService: EmployeesService,
-    private departamentsService: DepartmentsService
+    private departamentsService: DepartmentsService,
+    private routerOutlet: IonRouterOutlet,
+    private modalCrtl: ModalController,
+    private depsempsService: DepsEmpsService,
   ) { }
 
   ngOnInit() {
@@ -39,7 +44,7 @@ export class EmployeeFormPage implements OnInit {
       surnam: ['', [Validators.required]],
       user: [''],
       mail: ['', [Validators.required, Validators.email]],
-      age: ['', [Validators.required]],
+      age: ['', [Validators.required, Validators.min(18), Validators.max(90)]],
       position: ['', [Validators.required]],
       status: [true],
     });
@@ -107,6 +112,33 @@ export class EmployeeFormPage implements OnInit {
       status: this.employee.status,
     });
     this.fEmployee.disable();
+  }
+
+  onClickDepartmentForm(id: number) {
+    this.navCtrl.navigateForward(['/tabs/app/departments/department-form', { id, view: true }]);
+  }
+
+  async onClickAddDepartment() {
+    const modal = await this.modalCrtl.create({
+      component: ModalDepartmentsComponent,
+      canDismiss: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {
+        id_employee: this.employee.id,
+        departments: this.departments
+      }
+    });
+
+    modal.onDidDismiss().then(() => {
+      this.loadPageData();
+    });
+
+    return await modal.present();
+  }
+
+  async onClickDeleteEmployeeDepartment(id_department: number) {
+    await this.depsempsService.delete(id_department, this.employee.id);
+    this.loadPageData();
   }
 
 }

@@ -4,9 +4,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Department } from '../../../models/Department.model';
 import { ActivatedRoute } from '@angular/router';
 import { DepartmentsService } from '../../../services/departments.service';
-import { NavController } from '@ionic/angular';
+import { NavController, IonRouterOutlet, ModalController } from '@ionic/angular';
 import { Enterprise } from '../../../models/Enterprice.model';
 import { EnterprisesService } from '../../../services/enterprises.service';
+import { DepsEmpsService } from '../../../services/deps-emps.service';
+import { ModalEmployeesComponent } from '../../../components/modal-employees/modal-employees.component';
+import { Employee } from '../../../models/Employee.model';
+import { EmployeesService } from '../../../services/employees.service';
 
 @Component({
   selector: 'app-department-form',
@@ -22,13 +26,18 @@ export class DepartmentFormPage implements OnInit {
   fDepartment: FormGroup;
   department: Department = {};
   companies: Enterprise[] = [];
+  employees: Employee[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private departmentsService: DepartmentsService,
     private fb: FormBuilder,
     private navCtrl: NavController,
-    private enterprisesService: EnterprisesService
+    private enterprisesService: EnterprisesService,
+    private routerOutlet: IonRouterOutlet,
+    private modalCrtl: ModalController,
+    private depsempsService: DepsEmpsService,
+    private employeesService: EmployeesService
   ) { }
 
   ngOnInit() {
@@ -44,6 +53,7 @@ export class DepartmentFormPage implements OnInit {
 
   async loadPageData() {
     this.companies = await this.enterprisesService.list();
+    this.employees = await this.employeesService.list();
     this.route.params.subscribe({
       next: async (res) => {
         if (res.id != null) {
@@ -76,7 +86,7 @@ export class DepartmentFormPage implements OnInit {
     this.department.status = this.fDepartment.value.status;
     this.department.description = this.fDepartment.value.description;
     this.department.phone = this.fDepartment.value.phone;
-    this.department.id_enterprise = this.fDepartment.value.id_enterprise[0];
+    this.department.id_enterprise = this.fDepartment.value.id_enterprise[0] || this.department.id_enterprise;
 
     if (this.update) {
       await this.departmentsService.update(this.department);
@@ -98,6 +108,33 @@ export class DepartmentFormPage implements OnInit {
       id_enterprise: this.department.id_enterprise
     });
     this.fDepartment.disable();
+  }
+
+  async onClickAddEmployee() {
+    const modal = await this.modalCrtl.create({
+      component: ModalEmployeesComponent,
+      canDismiss: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {
+        id_department: this.department.id,
+        employees: this.employees
+      }
+    });
+
+    modal.onDidDismiss().then(() => {
+      this.loadPageData();
+    });
+
+    return await modal.present();
+  }
+
+  onClickEmployeeForm(id: number) {
+    this.navCtrl.navigateForward(['/tabs/app/employees/employee-form', { id, view: true }]);
+  }
+
+  async onClickDeleteEmployeeDepartment(id_employee: number) {
+    await this.depsempsService.delete(this.department.id, id_employee);
+    this.loadPageData();
   }
 
 }

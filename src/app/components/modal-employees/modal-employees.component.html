@@ -1,0 +1,21 @@
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item button (click)="onClickSelectEmployee(employee.id)" *ngFor="let employee of employees"
+      class="ion-no-padding">
+      <ion-avatar slot="start" size>
+        <img src="/assets/img/employee.png">
+      </ion-avatar>
+      <ion-label>
+        <ion-label>
+          <b>Name: </b> {{employee.name | uppercase}} {{employee.surnam | uppercase}}
+          <br>
+          <b>Email:</b> {{employee.mail}}
+          <br>
+          <b>Age:</b> {{employee.age}}
+          <br>
+          <b>State:</b> {{employee.status ? 'Active' : 'Disabled'}}
+        </ion-label>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

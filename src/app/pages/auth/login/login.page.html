@@ -1,17 +1,26 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-item>
-    <ion-label>
-      User <ion-text color="danger">*</ion-text>
-    </ion-label>
-    <ion-input [(ngModel)]="user" required></ion-input>
-  </ion-item>
-  <ion-button (click)="onClickLogin()" expand="block" fill="clear" shape="round">
-    Login
-  </ion-button>
+  <ion-grid class="vm-align-vertical">
+    <ion-row>
+      <ion-col size="12" class="ion-padding ion-text-center">
+        <ion-img src="assets/img/sicpa-banner.jpg"></ion-img>
+      </ion-col>
+    </ion-row>
+    <form (ngSubmit)="submitLogin()" #fLogin="ngForm">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="ift-round-20">
+            <ion-input name="codCliente" [(ngModel)]="user" required placeholder="Please enter your username">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+          <ion-button type="submit" [disabled]="fLogin.invalid" shape="round" color="warning" class="btn">
+            Login
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
 </ion-content>

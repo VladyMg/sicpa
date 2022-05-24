@@ -16,7 +16,7 @@
 <ion-content>
   <ion-list class="vm-shadow">
     <ion-item-sliding *ngFor="let employee of employees">
-      <ion-item button (click)="onClickDepartmentForm(employee.id)">
+      <ion-item button (click)="onClickEmployeeForm(employee.id)">
         <ion-avatar slot="start">
           <img src="/assets/img/employee.png">
         </ion-avatar>
@@ -33,7 +33,7 @@
         </ion-label>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="onClickDeleteDepartment(employee.id)">Delete</ion-item-option>
+        <ion-item-option color="danger" (click)="onClickDeleteEmployee(employee.id)">Delete</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

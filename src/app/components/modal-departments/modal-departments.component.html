@@ -1,0 +1,17 @@
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item button (click)="onClickSelectDepartment(department.id)" *ngFor="let department of departments"
+      class="ion-no-padding">
+      <ion-avatar slot="start" size>
+        <img src="/assets/img/department.png">
+      </ion-avatar>
+      <ion-label>
+        <b>Name: </b> {{department.name}}
+        <br>
+        <b>Description:</b> {{department.description}}
+        <br>
+        <b>State:</b> {{department.status ? 'Active' : 'Disabled'}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

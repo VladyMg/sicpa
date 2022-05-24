@@ -30,7 +30,7 @@ export class EmployeeListPage implements OnInit {
     this.employees = await this.employeesService.list();
   }
 
-  onClickDepartmentForm(id: number) {
+  onClickEmployeeForm(id: number) {
     this.navCtrl.navigateForward(['/tabs/app/employees/employee-form', { id, view: true }]);
   }
 
@@ -38,7 +38,7 @@ export class EmployeeListPage implements OnInit {
     this.navCtrl.navigateForward(['/tabs/app/employees/employee-form']);
   }
 
-  async onClickDeleteDepartment(id: number) {
+  async onClickDeleteEmployee(id: number) {
     await this.employeesService.delete(id);
     this.loadPageData();
   }

@@ -19,7 +19,8 @@
             </ion-label>
             <ion-input required formControlName="name" type="text" placeholder="Please enter company name"></ion-input>
           </ion-item>
-          <ion-item lines="none" *ngIf="!fCompany.controls.name.valid && fCompany.controls.name.touched">
+          <ion-item lines="none"
+            *ngIf="!fCompany.controls.name.valid && fCompany.controls.name.touched && update && !view">
             <ion-text color="danger" class="form-error">
               Please enter a valid name.
             </ion-text>
@@ -47,7 +48,8 @@
             <ion-input required formControlName="address" type="text" placeholder="Please enter company address">
             </ion-input>
           </ion-item>
-          <ion-item lines="none" *ngIf="!fCompany.controls.address.valid && fCompany.controls.address.touched">
+          <ion-item lines="none"
+            *ngIf="!fCompany.controls.address.valid && fCompany.controls.address.touched && update && !view">
             <ion-text color="danger" class="form-error">
               Please enter a valid address.
             </ion-text>
@@ -64,7 +66,8 @@
             <ion-input required formControlName="phone" type="text" placeholder="Please enter company phone">
             </ion-input>
           </ion-item>
-          <ion-item lines="none" *ngIf="!fCompany.controls.phone.valid && fCompany.controls.phone.touched">
+          <ion-item lines="none"
+            *ngIf="!fCompany.controls.phone.valid && fCompany.controls.phone.touched && update && !view">
             <ion-text color="danger" class="form-error">
               Please enter a valid phone.
             </ion-text>
@@ -72,12 +75,17 @@
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center">
-        <ion-col size="8" class="ion-text-center ion-padding">
-          <ion-button type="submit" expand="block" shape="round" color="success" [disabled]="!fCompany.valid"
+        <ion-col size="6" class="ion-padding" *ngIf="!view && update">
+          <ion-button (click)="onClickCancel()" expand="block" shape="round" color="medium">
+            Cancel
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" class="ion-text-center ion-padding">
+          <ion-button type="submit" expand="block" shape="round" color="warning" [disabled]="!fCompany.valid"
             *ngIf="!view">
             Submit
           </ion-button>
-          <ion-button (click)="onClickEditCompany()" expand="block" shape="round" color="tertiary" *ngIf="view">
+          <ion-button (click)="onClickEditCompany()" expand="block" shape="round" color="success" *ngIf="view">
             <b>Edit</b>
           </ion-button>
         </ion-col>

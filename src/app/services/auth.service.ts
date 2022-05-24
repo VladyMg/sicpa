@@ -13,6 +13,11 @@ export class AuthService {
     private navCtrl: NavController
   ) { }
 
+  logout() {
+    this.storageService.clearAll();
+    this.navCtrl.navigateRoot(['/auth/login']);
+  }
+
   login(user: string) {
     this.storageService.set(GlobalConstants.user, user);
     this.navCtrl.navigateForward(['/tabs/app/home']);

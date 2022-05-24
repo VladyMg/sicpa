@@ -18,10 +18,9 @@ img {
     height: 100%;
 
     ion-img {
-      width: 100%;
+      width: 90%;
       height: auto;
-      padding: 1rem;
-      object-fit: cover;
+      object-fit: fill;
     }
 
     ion-label {

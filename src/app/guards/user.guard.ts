@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { StorageService } from '../services/storage.service';
 import { GlobalConstants } from '../common/global-constants';
 import { NavController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,12 @@ import { NavController } from '@ionic/angular';
 export class UserGuard implements CanLoad {
 
   constructor(
-    private storageService: StorageService,
+    private authService: AuthService
   ) { }
 
   canLoad(): Promise<boolean> {
     return new Promise(async (resolve) => {
-      const user = await this.storageService.get(GlobalConstants.user);
+      const user = await this.authService.validateUser();
       if (user != null)
         return resolve(true);
       return resolve(false);

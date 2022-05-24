@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="fEmployee" (submit)="submitForm()">
-    <ion-grid>
+  <ion-grid>
+    <form [formGroup]="fEmployee" (submit)="submitForm()">
       <ion-row>
         <ion-col>
           <ion-item lines="full">
@@ -17,7 +17,7 @@
               <b>Name </b>
               <ion-text color="danger">*</ion-text>
             </ion-label>
-            <ion-input required formControlName="name" type="text" placeholder="Please enter department name">
+            <ion-input required formControlName="name" type="text" placeholder="Please enter employee name">
             </ion-input>
           </ion-item>
           <ion-item lines="none" *ngIf="!fEmployee.controls.name.valid && fEmployee.controls.name.touched && update">
@@ -34,7 +34,7 @@
               <b>Surname </b>
               <ion-text color="danger">*</ion-text>
             </ion-label>
-            <ion-input required formControlName="surnam" type="text" placeholder="Please enter department surnam">
+            <ion-input required formControlName="surnam" type="text" placeholder="Please enter employee surnam">
             </ion-input>
           </ion-item>
           <ion-item lines="none"
@@ -52,7 +52,7 @@
               <b>User </b>
               <ion-text color="danger">*</ion-text>
             </ion-label>
-            <ion-input required formControlName="name" type="text" placeholder="Please enter department name">
+            <ion-input required formControlName="user" type="text" placeholder="Please enter employee user">
             </ion-input>
           </ion-item>
         </ion-col>
@@ -64,7 +64,7 @@
               <b>Email </b>
               <ion-text color="danger">*</ion-text>
             </ion-label>
-            <ion-input required formControlName="mail" type="text" placeholder="Please enter department mail">
+            <ion-input required formControlName="mail" type="text" placeholder="Please enter employee mail">
             </ion-input>
           </ion-item>
           <ion-item lines="none" *ngIf="!fEmployee.controls.mail.valid && fEmployee.controls.mail.touched && update">
@@ -81,12 +81,14 @@
               <b>Age </b>
               <ion-text color="danger">*</ion-text>
             </ion-label>
-            <ion-input required formControlName="age" type="text" placeholder="Please enter department age">
+            <ion-input required formControlName="age" type="number" placeholder="Please enter employee age">
             </ion-input>
           </ion-item>
           <ion-item lines="none" *ngIf="!fEmployee.controls.age.valid && fEmployee.controls.age.touched && update">
             <ion-text color="danger" class="form-error">
               Please enter a valid age.
+              <br>
+              Employee must be over 18 yeard old.
             </ion-text>
           </ion-item>
         </ion-col>
@@ -98,7 +100,7 @@
               <b>Position </b>
               <ion-text color="danger">*</ion-text>
             </ion-label>
-            <ion-input required formControlName="position" type="text" placeholder="Please enter department position">
+            <ion-input required formControlName="position" type="text" placeholder="Please enter employee position">
             </ion-input>
           </ion-item>
           <ion-item lines="none"
@@ -136,7 +138,42 @@
           </ion-button>
         </ion-col>
       </ion-row>
-    </ion-grid>
-  </form>
+    </form>
+    <ion-row *ngIf="view">
+      <ion-col size="12">
+        <ion-card class="vm-shadow ion-no-margin">
+          <ion-card-header>
+            <ion-item>
+              <ion-label color="medium"><b>Employee Departments</b></ion-label>
+              <ion-button (click)="onClickAddDepartment()" color="warning">
+                <ion-icon slot="icon-only" name="add"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item-sliding *ngFor="let department of employee.departments">
+                <ion-item button (click)="onClickDepartmentForm(department.id)" class="ion-no-padding">
+                  <ion-avatar slot="start" size>
+                    <img src="/assets/img/department.png">
+                  </ion-avatar>
+                  <ion-label>
+                    <b>Name: </b> {{department.name}}
+                    <br>
+                    <b>Description:</b> {{department.description}}
+                    <br>
+                    <b>State:</b> {{department.status ? 'Active' : 'Disabled'}}
+                  </ion-label>
+                </ion-item>
+                <ion-item-options side="end">
+                  <ion-item-option color="danger" (click)="onClickDeleteEmployeeDepartment(department.id)">Delete
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-/
